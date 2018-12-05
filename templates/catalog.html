@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+  {% block content %}
+        {% for category in categories %}
+            <div class="col-sm-4 my-4">
+              <div class="card">
+                <img class="card-img-top" height= 300 width = 200 src="{{url_for('static',filename= 'image/'+category.image)}}" alt="{{category.name}}">
+                <div class="card-body text-center">
+                  <h4 class="card-title">{{category.name}}</h4>
+                </div>
+                <div class="card-footer">
+                   <a href="{{url_for('showItems',category_name = category.name)}}" class="btn btn-primary">View Items</a>
+                {% if session.get('username') %}
+                  <a href="{{url_for('newItem',category_name = category.name)}}" class="btn btn-primary">Add Item</a>
+                   {% if session.get('user_id') == category.user_id %}
+                  <a href="{{url_for('editCategory',category_name = category.name)}}" class="btn btn-primary Active">Edit</a>
+                  <a href="{{url_for('deleteCategory',category_name = category.name)}}" class="btn btn-primary Active">Delete</a>
+                    {% else %}
+                  <a href="{{url_for('editCategory',category_name = category.name)}}" class="btn btn-primary disabled">Edit</a>
+                  <a href="{{url_for('deleteCategory',category_name = category.name)}}" class="btn btn-primary disabled">Delete</a>
+                  {% endif %}
+                {% endif %}
+                 </div>
+              </div>
+            </div>
+       {% endfor %}
+        <!-- /.col-md-4 -->
+ {% endblock content %}

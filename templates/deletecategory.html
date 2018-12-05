@@ -1,0 +1,16 @@
+  
+{% extends 'main.html' %}
+  {% block content %}
+  <div class = 'container'>
+  <div class = 'row ml-4'>
+  <p> Are you sure you want to delete category {{category.name}} ? </p>
+ </div>
+ <div class = 'row ml-4'>
+    <form action="{{url_for('deleteCategory',category_name=category.name)}}" method = 'post'>
+          	<input class="btn btn-primary" type="submit" id="submit" value = "Delete">
+     <a class="btn btn-primary" href = '{{url_for('showCatalog')}}'>Cancel</a>
+    </form>
+</div>
+</div>
+        <!-- /.col-md-4 -->
+ {% endblock content %}

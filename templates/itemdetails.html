@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-10 mx-auto">
+        <div class="card">
+            <img class="card-img-top" height= 300 width = 200 src="{{url_for('static',filename= 'image/'+item.image)}}" alt="{{item.title}}">
+             <div class="card-body">
+              <h2 class="card-title">{{item.title}}</h2>
+              <h3>{{category_name}}</h3>
+              <p>${{item.price}}</p>
+              <p>{{item.description}}</p>
+              </div>
+             <div class="card-footer">
+            {% if session.get('username') and session.get('user_id') == item.user_id %}
+         <a href="{{url_for('editItem',category_name=category_name,item_title=item.title)}}" class="btn btn-primary Active">Edit</a>
+         <a href="{{url_for('deleteItem',category_name=category_name,item_title=item.title)}}" class="btn btn-primary Active">Delete</a>
+      {% else %}
+         <a href="{{url_for('editItem',category_name=category_name,item_title=item.title)}}" class="btn btn-primary disabled">Edit</a>
+       <a href="{{url_for('deleteItem',category_name=category_name,item_title=item.title)}}" class="btn btn-primary disabled">Delete</a>
+        {% endif %}
+      </div>
+         </div>
+            </div>
+            </div>
+
+ {% endblock content %}

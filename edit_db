@@ -1,0 +1,41 @@
+
+user = session.query(User).filter_by(id=1).all()
+
+for user in users:
+  print user.name
+  print user.email
+  print user.id
+
+categories = session.query(Category).filter_by(status = 'A').all()
+for category in categories:
+    print category.name
+    print category.user_id
+    print category.id
+
+empty_id = session.query(Category).filter_by(status = 'A', user_id =None).all()
+
+
+for category in empty_id:
+    print category.name
+    print category.user_id
+    print category.id
+
+for category in empty_id:
+    category.user_id = 2
+    session.add(category)
+    session.commit()
+
+
+items = session.query(CategoryItem).filter_by(status = 'A', user_id =None).all()
+
+for item in items:
+  print item.id
+  print item.user_id
+  print item.title
+  print item.image
+  print item.description
+
+items = session.query(CategoryItem).filter_by(status = 'A').all()
+
+
+items = session.query(CategoryItem).filter_by(status = 'A', user_id =None).all()
